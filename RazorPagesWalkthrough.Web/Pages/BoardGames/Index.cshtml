@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var game in Model.BoardGames)
+        @foreach (var game in Model.BoardGames)
         {
             <tr>
                 <td>@game.Title</td>
@@ -25,9 +25,12 @@
                 <td>@game.MinPlayers</td>
                 <td>@game.MaxPlayers</td>
                 <td>
+                    <a class="btn btn-default" asp-page="./Delete" asp-route-id="@game.ID">Delete</a>
                     Links will go here
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a class="btn btn-default" asp-page="./Add">Add</a>

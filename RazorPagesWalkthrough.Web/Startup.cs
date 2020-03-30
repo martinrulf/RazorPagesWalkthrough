@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RazorPagesWalkthrough.Web.DataContext;
@@ -36,7 +37,9 @@ namespace RazorPagesWalkthrough.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<BoardGamesDbContext>(options => options.UseInMemoryDatabase(databaseName: "BoardGames"));
+            services.AddDbContext<BoardGamesDbContext>(options => options
+                .UseInMemoryDatabase(databaseName: "BoardGames")
+                .ConfigureWarnings(cb => cb.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
